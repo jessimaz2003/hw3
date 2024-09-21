@@ -84,6 +84,7 @@ def main():
 
 def my_test():
     print("Starting my_test() for extra credit...")
+
     book1 = DigitalBookofAnswers(["Stay Positive", "Go For It", "Enjoy It"])
     print("Testing answer_log with no questions asked:")
     res = book1.answer_log()
@@ -98,7 +99,6 @@ def my_test():
     print("Expected: " + str(expected) + ", Actual: " + str(res))
     print(" ")
 
- 
     print("Testing open_book first prompt (enter 'Done' to finish):")
     book3 = DigitalBookofAnswers(["Follow Your Inner Voice", "Stay Positive", "Go For It"])
     book3.open_book()
@@ -108,15 +108,22 @@ def my_test():
     response1 = book4.check_get_answer("Will I succeed?")
     response2 = book4.check_get_answer("Will I succeed?")
     expected_response2 = "I've already answered this question. The answer is: Follow Your Inner Voice"
-    print("First response: " + (response1))
-    print("Second response: " + str(response2))
-    print("Expected: " + str(expected_response2) + ", Actual: " + str(response2))
+    print("First response:", response1)
+    print(f"Second response: {response2}")
+    print(f"Expected: {expected_response2}, Actual: {response2}")
     print(" ")
     print("Testing that check_get_answer adds answer index to answered_list:")
     book4.questions_asked_list = []
+    book.book_answer_list = ['Go For It']
+    book.answered_list = []
+    book.check_get_answer('test question 2')
+    expected = [0]
+    res= book.answered_list
+    print(f"Expected: {expected, Actual: {res}")
+    print(" ")      
 
 
 
 # Only run the main function if this file is being run (not imported)
-if __name__ == main():
+if __name__ == "__main__":
     my_test()  
