@@ -12,61 +12,62 @@ class DigitalBookofAnswers:
         self.questions_asked_list = []
         self.answered_list = []
 
-#"""Returns a string with all the answers in book_answer_list separated by dashes"""
+
     def __str__(self):
-        if self.book_answer_list:
-            return " - ".join(self.book_answer_list)
-        else:
+        if len(self.book_answer_list) == 0:
             return ""
+        else:
+            return " - ".join(self.book_answer_list)
 
     def check_get_answer(self, question):
         if question in self.questions_asked_list:
-            index = self.questions_asked_list.index(str(question))
-            answer = self.book_answer_list[self.answered_list[index]]
-            ans = "I have already answered this question. The answer is: "
-            ans += str(answer)
-            return ans
+            index = self.questions_asked_list.index((question))
+            return f"I have already answered this question. The answer is: (self.book_answer_list(self.answered_list[index])"
         else:
         # Pick a random answer and store its index in answered_list
             random_index = random.randint(0, len(self.book_answer_list) - 1)
-            random_answer = self.book_answer_list[random_index]
-            self.questions_asked_list.append(str(question))
+            answer = self.book_answer_list[random_index]
+            self.questions_asked_list.append(question)
             self.answered_list.append(random_index)
-            return random_answer
+            return f"{answer}"
 
 
     def open_book(self):
         while True:
-            turn_number = len(self.questions_asked_list) + 1
-            input_str = "Turn "
-            input_str += str(turn_number)
-            input_str += " - Please enter your question: "
-            question = input(input_str)
+            question = input(f"turn {turn_number} - Please enter your question: ")
+            turn_number= len(self.questions_asked_list) + 1
             if question == "Done":
                 print("Goodbye! See you soon.")
                 break
-            else:
-                answer = self.check_get_answer(question)
-                print(answer)
-
-    def answer_log(self):
-        if not self.answered_list:
+            answer = self.check_get_answer(question)
+            print(answer)
+        if len(self.answered_list)==0:
             print("Empty")
             return []
+    
 
-        # Create a frequency dictionary for answers
-        answer_count = {}
+    def answer_log(self):
+        turn_number = 1
+        answer_count= {}
         for index in self.answered_list:
             answer = self.book_answer_list[index].lower()
             if answer in answer_count:
                 answer_count[answer] += 1
             else:
                 answer_count[answer] = 1
+        frequency_list = []
+        for answer, count in answer_count.items():
+            frequency_list.append(f"{count}-{answer}")
+        for i in range(len(frequency_list)):
+            for j in range(i+1, len(frequency_list)):
+                count_i = int(frequency_list[i].split(' - ')[0])
+                count_j = int(frequency_list[j].split(' - ')[0])
+                if count_j > count_i:
+                    frequency_list[i], frequency_list[j] = frequency_list[j], frequency_list[i]
+        return frequency_list
+    
 
-        # Sort the answers by frequency in descending order
-        sorted_answers = sorted(
-            answer_count.items(), key=lambda x: x[1], reverse=True
-        )
+
 
         # Format the output list
         answer_log_list = []        
@@ -133,7 +134,7 @@ def my_test():
     book4.questions_asked_list = []
 
 
-
+print (my_test)
 
 # Only run the main function if this file is being run (not imported)
 if __name__ == "__main__":
