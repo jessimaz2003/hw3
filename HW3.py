@@ -1,4 +1,4 @@
-# Your name: Jessica Imaz
+# Your name: Jessica Imaz.
 # Your student id: 24536986
 # Your email: jimaz@umich.edu
 # Who or what you worked with on this homework (including generative AI like ChatGPT)
@@ -22,7 +22,7 @@ class DigitalBookofAnswers:
     def check_get_answer(self, question):
         if question in self.questions_asked_list:
             index = self.questions_asked_list.index(question)
-            return f"I have already answered this question. The answer is: {self.book_answer_list[self.answered_list[index]]}"
+            return f"I've already answered this question. The answer is: {self.book_answer_list[self.answered_list[index]]}"
         else:
             random_index = random.randint(0, len(self.book_answer_list) - 1)
             answer = self.book_answer_list[random_index]
@@ -41,7 +41,7 @@ class DigitalBookofAnswers:
             answer = self.check_get_answer(question)
             print(answer)
         if len(self.answered_list)==0:
-            print("Empty")
+            print("No questions asked.")
             return []
     
 
@@ -59,8 +59,8 @@ class DigitalBookofAnswers:
             frequency_list.append(f"{count}-{answer}")
         for i in range(len(frequency_list)):
             for j in range(i+1, len(frequency_list)):
-                count_i = int(frequency_list[i].split(' - ')[0])
-                count_j = int(frequency_list[j].split(' - ')[0])
+                count_i = int(frequency_list[i].split('-')[0])
+                count_j = int(frequency_list[j].split('-')[0])
                 if count_j > count_i:
                     frequency_list[i], frequency_list[j] = frequency_list[j], frequency_list[i]
         return frequency_list
@@ -94,7 +94,7 @@ def my_test():
     book2 = DigitalBookofAnswers(["Stay Positive", "Go For It", "Enjoy It"])
     book2.answered_list = [2, 1, 2]
     print("Testing answer_log with answers [2, 1, 2]:")
-    expected = ["2 - enjoy it", "1 - go for it"]
+    expected = ["2-enjoy it", "1-go for it"]
     res = book2.answer_log()
     print("Expected: " + str(expected) + ", Actual: " + str(res))
     print(" ")
@@ -114,16 +114,17 @@ def my_test():
     print(" ")
     print("Testing that check_get_answer adds answer index to answered_list:")
     book4.questions_asked_list = []
-    book.book_answer_list = ['Go For It']
-    book.answered_list = []
-    book.check_get_answer('test question 2')
+    book4.book_answer_list = ['Go For It']
+    book4.answered_list = []
+    book4.check_get_answer('test question 2')
     expected = [0]
-    res= book.answered_list
-    print(f"Expected: {expected, Actual: {res}")
-    print(" ")      
+    res= book4.answered_list
+    print(f"Expected: {expected}, Actual: {res}")
+    print(" ")     
 
 
 
 # Only run the main function if this file is being run (not imported)
 if __name__ == "__main__":
     my_test()  
+
