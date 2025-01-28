@@ -1,8 +1,3 @@
-# Your name: Jessica Imaz.
-# Your student id: 24536986
-# Your email: jimaz@umich.edu
-# Who or what you worked with on this homework (including generative AI like ChatGPT)
-# Asked ChatGPT to help correct the code structure and methods according to the assignment requirements.
 
 import random
 
